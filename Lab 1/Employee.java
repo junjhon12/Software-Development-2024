@@ -44,4 +44,14 @@ public class Employee extends Person {
     public Role getRole() {
         return role; // Return the role
     }
+
+    public void setRole(Role valueOf) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setRole'");
+    }
+
+    public void setDepartment(String newDepartment) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setDepartment'");
+    }
 }

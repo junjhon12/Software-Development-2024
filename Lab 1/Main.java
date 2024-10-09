@@ -12,6 +12,7 @@ public class Main {
         // Create instances of Employee and Manager with the Role enum
         Employee employee1 = new Employee("John Doe", 30, "123 Maple Street", "E12345", "Engineering", 85000.00, Role.ENGINEER);
         Manager manager1 = new Manager("Alice Johnson", 40, "789 Birch Lane", "M67890", "IT", 95000.00, 5, 10000.00, Role.MANAGER);
+        Employee newEmployee1 = new Employee("New Guy", 21, "Some Place", "E00000", "Eintern", 0, Role.ENGINEER);
 
         // Add the created employee and manager to their respective lists
         employeeList.add(employee1); // Add employee1 to employeeList
@@ -31,5 +32,23 @@ public class Main {
         // Create an instance of BonusCalculator for the manager and print their bonus strategy
         BonusCalculator bonusCalculator = new BonusCalculator(manager1); // Pass manager1 directly
         bonusCalculator.printBonusStrategy(); // Print the bonus strategy for manager1
+
+        // Employee and Observers setup for observable list
+        ObservableEmployeeList observableEmployeeList = new ObservableEmployeeList(); // Change the variable name
+        observableEmployeeList.addObserver(new HRDepartmentObserver());
+        observableEmployeeList.addObserver(new ManagerObserver());
+        observableEmployeeList.addObserver(new DepartmentHeadObserver());
+
+        // External salary system
+        ExternalSalaryCalculator externalCalculator = new ExternalSalaryCalculator();
+        Compensable salaryAdapter = new ExternalSalaryAdapter(externalCalculator);
+
+        // Company Facade
+        CompanyFacade company = new CompanyFacade(observableEmployeeList, reportGenerator, bonusCalculator);
+
+        // Add employee to the observable list and generate reports
+        company.addEmployee(newEmployee1);
+        company.printBonus();
+        company.generateReport();
     }
 }
