@@ -12,16 +12,20 @@ public class Main {
         // Create instances of Employee and Manager with the Role enum
         Employee employee1 = new Employee("John Doe", 30, "123 Maple Street", "E12345", "Engineering", 85000.00, Role.ENGINEER);
         Manager manager1 = new Manager("Alice Johnson", 40, "789 Birch Lane", "M67890", "IT", 95000.00, 5, 10000.00, Role.MANAGER);
-        Employee newEmployee1 = new Employee("New Guy", 21, "Some Place", "E00000", "Eintern", 0, Role.ENGINEER);
+        Employee newEmployee1 = new Employee("New Guy", 21, "Some Place", "E00000", "Engineering", 0, Role.ENGINEER);
 
         // Add the created employee and manager to their respective lists
         employeeList.add(employee1); // Add employee1 to employeeList
+        employeeList.add(newEmployee1);
         managerList.add(manager1);    // Add manager1 to managerList
 
         // Print information for the employee and manager
         employee1.printInfo(); // Call printInfo method for employee1
         System.out.println();   // Print a blank line for spacing
         manager1.printInfo();   // Call printInfo method for manager1
+        System.out.println();
+        newEmployee1.printInfo();
+        System.out.println();
 
         // Create an instance of ReportGenerator to generate reports
         ReportGenerator reportGenerator = new ReportGenerator(employeeList, managerList);
@@ -38,6 +42,7 @@ public class Main {
         observableEmployeeList.addObserver(new HRDepartmentObserver());
         observableEmployeeList.addObserver(new ManagerObserver());
         observableEmployeeList.addObserver(new DepartmentHeadObserver());
+        System.out.println();
 
         // External salary system
         ExternalSalaryCalculator externalCalculator = new ExternalSalaryCalculator();
@@ -49,6 +54,7 @@ public class Main {
         // Add employee to the observable list and generate reports
         company.addEmployee(newEmployee1);
         company.printBonus();
+        System.out.println();
         company.generateReport();
     }
 }
