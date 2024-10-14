@@ -1,7 +1,6 @@
 import java.util.ArrayList; // Import ArrayList class
 import java.util.List;      // Import List interface
 
-// Main class to run the application
 public class Main {
     // Entry point of the application
     public static void main(String[] args) {
@@ -37,24 +36,34 @@ public class Main {
         BonusCalculator bonusCalculator = new BonusCalculator(manager1); // Pass manager1 directly
         bonusCalculator.printBonusStrategy(); // Print the bonus strategy for manager1
 
-        // Employee and Observers setup for observable list
-        ObservableEmployeeList observableEmployeeList = new ObservableEmployeeList(); // Change the variable name
-        observableEmployeeList.addObserver(new HRDepartmentObserver());
-        observableEmployeeList.addObserver(new ManagerObserver());
-        observableEmployeeList.addObserver(new DepartmentHeadObserver());
-        System.out.println();
+        // Observer pattern setup
+        ObservableEmployeeList observableEmployeeList = new ObservableEmployeeList();
+        observableEmployeeList.addObserver(new HRDepartmentObserver()); // Adding HR observer
+        observableEmployeeList.addObserver(new ManagerObserver());      // Adding Manager observer
 
-        // External salary system
+        // Add employee to observable list and trigger notification to observers
+        System.out.println("\nAdding new employee...");
+        observableEmployeeList.addEmployee(newEmployee1);  // Notifies observers
+
+        // Update employee role and department, triggering observer notifications
+        System.out.println("\nUpdating employee role and department...");
+        observableEmployeeList.updateEmployee(employee1, "Senior Engineer", "Product Development");
+
+        // Adapter pattern for external salary system
         ExternalSalaryCalculator externalCalculator = new ExternalSalaryCalculator();
-        Compensable salaryAdapter = new ExternalSalaryAdapter(externalCalculator);
+        ExternalSalaryAdapter salaryAdapter = new ExternalSalaryAdapter(externalCalculator, employee1.getSalary(), 5000.00);
 
-        // Company Facade
+        // Print total compensation using the adapter pattern
+        System.out.println("\nTotal Compensation (with Adapter): " + salaryAdapter.calculateTotalCompensation());
+
+        // Company Facade setup and usage
         CompanyFacade company = new CompanyFacade(observableEmployeeList, reportGenerator, bonusCalculator);
 
-        // Add employee to the observable list and generate reports
-        company.addEmployee(newEmployee1);
-        company.printBonus();
+        // Add new employee through facade
+        System.out.println("\nAdding new employee via CompanyFacade...");
+        company.addEmployee(newEmployee1);  // This adds employee and notifies observers
+        company.printBonus();               // Prints the bonus details
         System.out.println();
-        company.generateReport();
+        company.generateReport();           // Generates and prints reports
     }
 }

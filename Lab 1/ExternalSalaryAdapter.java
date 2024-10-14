@@ -1,7 +1,7 @@
 public class ExternalSalaryAdapter implements Compensable {
     private ExternalSalaryCalculator externalCalculator;
 
-    public ExternalSalaryAdapter(ExternalSalaryCalculator externalCalculator) {
+    public ExternalSalaryAdapter(ExternalSalaryCalculator externalCalculator, double d, double e) {
         this.externalCalculator = externalCalculator;
     }
 
