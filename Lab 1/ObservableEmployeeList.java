@@ -22,8 +22,8 @@ public class ObservableEmployeeList {
     }
 
     // Update employee's role or department and notify observers
-    public void updateEmployee(Employee employee, String newRole, String newDepartment) {
-        employee.setRole(Role.valueOf(newRole));
+    public void updateEmployee(Employee employee, Role newRole, String newDepartment) {
+        employee.setRole(newRole);
         employee.setDepartment(newDepartment);
         notifyObservers("Employee updated: " + employee.getName() 
                         + ", New Role: " + newRole + ", New Department: " + newDepartment);

@@ -45,13 +45,13 @@ public class Employee extends Person {
         return role; // Return the role
     }
 
-    public void setRole(Role valueOf) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setRole'");
+    // Setter for role
+    public void setRole(Role role) {
+        this.role = role; // Set the role to the passed parameter
     }
 
+    // Setter for department
     public void setDepartment(String newDepartment) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setDepartment'");
+        this.department = newDepartment; // Set the department to the passed parameter
     }
 }
